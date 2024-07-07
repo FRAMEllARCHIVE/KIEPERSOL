@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>KIEPERSOL</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #websiteContainer {
+            width: 222px;
+            height: 292px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            transform: translate(-50%, -50%) scale(1.55);
+            background-color: transparent;
+            overflow: hidden;
+            border-radius: 12px;
+            z-index: 10;
+            transition: transform 0.6s ease;
+            left: 50%;
+            top: 50%;
+        }
+
+        #websiteContainer:hover {
+            transform: translate(-50%, -50%) scale(1.9);
+        }
+
+.searchBar {
+    position: absolute;
+    top: 111px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 20px;
+    padding: 8px 111px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.2;
+}
+
+
+        .searchBar input[type="text"] {
+            border: none;
+            outline: none;
+            width: 120px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 10px;
+        }
+
+        .brandingText {
+            position: absolute;
+            top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+            color: white;
+            font-size: 52px;
+            font-weight: bold;
+            letter-spacing: 22px;
+    opacity: 0.6;
+        }
+
+        .instagram-icon {
+            position: absolute;
+            bottom: 22px;
+            width: 50px;
+            height: 50px;
+            z-index: 12;
+            transform: translate(-50%, -50%);
+        }
+
+        @media only screen and (max-width: 600px) {
+            #websiteContainer {
+            width: 222px;
+            height: 292px;
+                transform: translate(-50%, -45%) scale(1.4);
+            }
+
+.searchBar {
+    position: absolute;
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 20px;
+    padding: 8px 77px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.2;
+}
+
+
+        .brandingText {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -0%);
+            color: white;
+            font-size: 28px;
+            letter-spacing: 11px;
+            opacity: 0.6;
+        }
+
+
+        #websiteContainer:hover {
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+        .instagram-icon {
+            position: absolute;
+            bottom: 8px;
+            width: 50px;
+            height: 50px;
+            z-index: 12;
+            transform: translate(-50%, -50% scale(1.1);
+        }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="websiteContainer">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C83qLlhqAvk/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
+    </div>
+
+    <div class="searchBar">
+        <input type="text" placeholder="">
+    </div>
+
+    <a href="https://www.instagram.com/kiepersol_krs/" target="_blank">
+        <img src="instagram.png" alt="Instagram" class="instagram-icon">
+    </a>
+
+    <div class="brandingText">KIEPERSOL</div>
+
+    <script async src="https://www.instagram.com/embed.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const links = [
+                "https://www.instagram.com/reel/C9AFylpKngS/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C8_6hDhqmP7/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C8JoB-lq0PB/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C8tgor3qc4-/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C81zaOjqk5I/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C83qLlhqAvk/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C7Q4UxUqBGo/?utm_source=ig_embed&utm_campaign=loading",
+                "https://www.instagram.com/reel/C4Ka0UlNwdb/?utm_source=ig_embed&utm_campaign=loading"
+            ];
+
+            let currentIndex = 0;
+
+            function updateInstagramEmbed() {
+                const container = document.getElementById('websiteContainer');
+                container.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${links[currentIndex]}" data-instgrm-version="14"></blockquote>`;
+                // Reload Instagram embed script
+                instgrm.Embeds.process();
+            }
+
+            function handleSwipe(direction) {
+                if (direction === 'left') {
+                    currentIndex = (currentIndex + 1) % links.length;
+                } else if (direction === 'right') {
+                    currentIndex = (currentIndex - 1 + links.length) % links.length;
+                }
+                updateInstagramEmbed();
+            }
+
+            let touchstartX = 0;
+            let touchendX = 0;
+
+            function checkSwipe() {
+                if (touchendX < touchstartX) handleSwipe('left');
+                if (touchendX > touchstartX) handleSwipe('right');
+            }
+
+            document.addEventListener('touchstart', e => {
+                touchstartX = e.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', e => {
+                touchendX = e.changedTouches[0].screenX;
+                checkSwipe();
+            });
+
+            document.addEventListener('click', e => {
+                const screenWidth = window.innerWidth;
+                const clickX = e.clientX;
+                if (clickX < screenWidth / 3) {
+                    // Left third
+                    handleSwipe('left');
+                } else if (clickX > 2 * screenWidth / 3) {
+                    // Right third
+                    handleSwipe('right');
+                } else {
+                    // Middle third - do nothing
+                }
+            });
+
+            links.forEach(link => {
+                const script = document.createElement('script');
+                script.src = link;
+                script.async = true;
+                document.body.appendChild(script);
+            });
+        });
+    </script>
+</body>
+</html>
