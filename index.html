@@ -10,41 +10,49 @@
       background-color: #f0f0f0;
       margin: 0;
       padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     .container {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
-      padding: 20px;
+      width: 100%;
+      max-width: 500px;
     }
     .post {
       background-color: #fff;
       border: 1px solid #ddd;
       border-radius: 8px;
-      margin: 10px;
       padding: 10px;
-      max-width: 300px;
+      max-width: 100%;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      flex: 1 1 calc(33.333% - 40px); /* Adjust the flex basis */
-      box-sizing: border-box; /* Ensure padding is included in width */
+      text-align: center;
     }
-    .post img {
+    .post img, .post video {
       max-width: 100%;
       border-radius: 8px;
     }
-    .post p {
-      margin: 10px 0 0;
+    .post video {
+      width: 100%;
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="instagram-posts"></div>
+  <div class="container" id="instagram-posts">
+    <div class="post" id="current-post"></div>
+  </div>
 
   <script>
     const Part1 = 'IGQWRPUV8ybGQtckRtU2ZAQUXJ2SDk4ck9sRzRDczFWS04zUE1NQlFJY0wzT2';
     const Part2 = 'NLemw5VTZAPTk1IWVh6cHFWWWlRNWdDVGJoYjlPYjNhUkNxRTBNb3VNSk1VZAGxUdXJ6SUR2WVVDQ0Rra01LT2kyWWxDM1otOUJ2WFkZD';
     const accessToken = Part1 + Part2;
     const userId = '26823956937203028';
+    let currentIndex = 0;
+    let posts = [];
 
     async function fetchInstagramPosts() {
       try {
@@ -52,7 +60,8 @@
         const data = await response.json();
 
         if (response.ok) {
-          displayPosts(data.data);
+          posts = data.data;
+          displayPost(currentIndex);
         } else {
           console.error('Error fetching Instagram posts:', data);
         }
@@ -61,32 +70,32 @@
       }
     }
 
-    function displayPosts(posts) {
-      const container = document.getElementById('instagram-posts');
-      if (!posts || posts.length === 0) {
-        container.innerHTML = '<p>No posts available.</p>';
-        return;
+    function displayPost(index) {
+      const post = posts[index];
+      const container = document.getElementById('current-post');
+      container.innerHTML = '';
+
+      let mediaElement;
+      if (post.media_type === 'IMAGE' || post.media_type === 'CAROUSEL_ALBUM') {
+        mediaElement = `<img src="${post.media_url}" alt="Instagram post">`;
+      } else if (post.media_type === 'VIDEO') {
+        mediaElement = `<video controls><source src="${post.media_url}" type="video/mp4">Your browser does not support the video tag.</video>`;
       }
-      posts.forEach(post => {
-        const postElement = document.createElement('div');
-        postElement.classList.add('post');
 
-        let mediaElement;
-        if (post.media_type === 'IMAGE' || post.media_type === 'CAROUSEL_ALBUM') {
-          mediaElement = `<img src="${post.media_url}" alt="${post.caption || 'Instagram post'}">`;
-        } else if (post.media_type === 'VIDEO') {
-          mediaElement = `<video controls><source src="${post.media_url}" type="video/mp4">Your browser does not support the video tag.</video>`;
-        }
-
-        postElement.innerHTML = `
-          ${mediaElement}
-          <p>${post.caption || ''}</p>
-        `;
-
-        container.appendChild(postElement);
-      });
+      container.innerHTML = mediaElement;
     }
 
+    function handleKeyDown(event) {
+      if (event.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % posts.length;
+        displayPost(currentIndex);
+      } else if (event.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + posts.length) % posts.length;
+        displayPost(currentIndex);
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
     fetchInstagramPosts();
   </script>
 </body>
