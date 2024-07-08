@@ -39,14 +39,19 @@
   <div class="container" id="instagram-posts"></div>
 
   <script>
-    async function fetchInstagramPosts() {
-      const accessToken = 'IGQWRNVEt4VG1iZAUNudmFsNFNzOS1iaHMtMC1BOTJSMEgxM0NMdlBQN0hCazRPNTlmNG53VWQySnJoREtzS293Um16MzZAJUjNXYmFwcmJfcEZAWQ1RIN18xTjNLTXE5T0pLTEM0aHhJVjFKXzFxNjBObzMyTFpiQ1kZD';
-      const userId = '26823956937203028';
+    const accessToken = 'IGQWRNVEt4VG1iZAUNudmFsNFNzOS1iaHMtMC1BOTJSMEgxM0NMdlBQN0hCazRPNTlmNG53VWQySnJoREtzS293Um16MzZAJUjNXYmFwcmJfcEZAWQ1RIN18xTjNLTXE5T0pLTEM0aHhJVjFKXzFxNjBObzMyTFpiQ1kZD';
+    const userId = '26823956937203028';
 
+    async function fetchInstagramPosts() {
       try {
         const response = await fetch(`https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,media_type,thumbnail_url,permalink&access_token=${accessToken}`);
         const data = await response.json();
-        displayPosts(data.data);
+
+        if (response.ok) {
+          displayPosts(data.data);
+        } else {
+          console.error('Error fetching Instagram posts:', data);
+        }
       } catch (error) {
         console.error('Error fetching Instagram posts:', error);
       }
@@ -54,6 +59,10 @@
 
     function displayPosts(posts) {
       const container = document.getElementById('instagram-posts');
+      if (!posts || posts.length === 0) {
+        container.innerHTML = '<p>No posts available.</p>';
+        return;
+      }
       posts.forEach(post => {
         const postElement = document.createElement('div');
         postElement.classList.add('post');
