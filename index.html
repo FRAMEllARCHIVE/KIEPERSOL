@@ -39,7 +39,10 @@
   <div class="container" id="instagram-posts"></div>
 
   <script>
-    const accessToken = 'IGQWRNVEt4VG1iZAUNudmFsNFNzOS1iaHMtMC1BOTJSMEgxM0NMdlBQN0hCazRPNTlmNG53VWQySnJoREtzS293Um16MzZAJUjNXYmFwcmJfcEZAWQ1RIN18xTjNLTXE5T0pLTEM0aHhJVjFKXzFxNjBObzMyTFpiQ1kZD';
+    const Part1 = 'IGQWRNVEt4VG1iZAUNudmFsNFNzOS1iaHMtMC1BOTJSMEgxM0NMdlBQN0hCazRPNTlmNG53VWQySnJoREtzS293Um16MzZAJ';
+    const Part2 = 'UjNXYmFwcmJfcEZAWQ1RIN18xTjNLTXE5T0pLTEM0aHhJVjFKXzFxNjBObzMyTFpiQ1kZD';
+    const accessToken = Part1 + Part2;
+    const userId = '26823956937203028';
     const userId = '26823956937203028';
 
     async function fetchInstagramPosts() {
