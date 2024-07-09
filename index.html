@@ -16,24 +16,31 @@
       justify-content: center;
       height: 100vh;
     }
-    .container {
-      display: flex;
-        flex-direction: column; /* Changed to column */
-      align-items: center;
-      justify-content: center;
-      height: 90vh;
-      max-width: 500px;
+.container {
+  display: flex;
+  flex-direction: column; /* Changed to column */
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 500px;
+  height: 90vh; /* Ensure the container always takes 90% of viewport height */
+  overflow: hidden; /* Hide overflow */
+}
 
-    }
-    .post {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      padding: 10px;
-      max-width: 100%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
+.post {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 10px;
+  width: 100%; /* Ensure the post takes the full width of the container */
+  height: 100%; /* Ensure the post takes the full height of the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Hide overflow */
+}
     .post img, .post video {
       max-width: 100%;
       border-radius: 8px;
