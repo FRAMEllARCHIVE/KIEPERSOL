@@ -50,14 +50,14 @@
   <script>
     const Part1 = 'IGQWRPY2ZAFRVQ3MGRianozY1F1Y2RnbER4dE9mTC0yYlp2UUVpbkVYSjJuZAV9EdWtiYzlEMEJpQn';
     const Part2 = 'AwN1dIOGVFQVVzSVZAtX3JMU3NuZAzFzdTUzeFdBTnhmRDRVRVRZAdDM1WXpNRHlVRGRCc1RqdjFmSTYxNXUwc1kZD';
-    const accessToken = Part1 + Part2;
-    const userId = '7582533351873207';
+    const Part3 = Part1 + Part2;
+    const Part4 = '7582533351873207';
     let currentIndex = 0;
     let posts = [];
 
     async function fetchInstagramPosts() {
       try {
-        const response = await fetch(`https://graph.instagram.com/${userId}/media?fields=id,caption,media_url,media_type,thumbnail_url,permalink&access_token=${accessToken}`);
+        const response = await fetch(`https://graph.instagram.com/${Part4}/media?fields=id,caption,media_url,media_type,thumbnail_url,permalink&access_token=${Part3}`);
         const data = await response.json();
 
         if (response.ok) {
