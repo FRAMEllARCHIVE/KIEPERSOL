@@ -33,7 +33,7 @@
     overflow: hidden;
     position: relative;
     margin: auto;
-    margin-top: 22vh;
+    margin-top: 5vh;
   }
 
 .post img, .post video {
@@ -82,18 +82,15 @@
         }
 
 .instagram-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-    margin: auto;
-    margin-top: 6vh;
-            bottom: 12px;
-            width: 33px;
-            height: 33px;
-            z-index: 12;
-        }
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 33px;
+    height: 33px;
+    z-index: 12;
+}
+
 
 </style>
 </head>
@@ -109,10 +106,11 @@
 
 <div class="container" id="instagram-posts">
     <div class="post" id="current-post"></div>
+  </div>
+
 <a href="https://www.instagram.com/kiepersol_krs/" target="_blank">
         <img src="instagram.png" alt="Instagram" class="instagram-icon">
     </a>
-  </div>
 
   <script>
 
