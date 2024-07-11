@@ -7,6 +7,8 @@
   <link rel="icon" type="image/png" href="favicon.png">
 <style>
   body {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
@@ -31,7 +33,7 @@
     overflow: hidden;
     position: relative;
     margin: auto;
-    margin-top: 6vh;
+    margin-top: 22vh;
   }
 
 .post img, .post video {
@@ -80,10 +82,13 @@
         }
 
 .instagram-icon {
-            position: absolute;
-            top: 94%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    margin-top: 6vh;
             bottom: 12px;
             width: 33px;
             height: 33px;
@@ -98,14 +103,15 @@
         <input type="text" placeholder="">
     </div>
 
-<a href="https://www.instagram.com/kiepersol_krs/" target="_blank">
-        <img src="instagram.png" alt="Instagram" class="instagram-icon">
-    </a>
+
 
 <div class="brandingText">KIEPERSOL</div>
 
 <div class="container" id="instagram-posts">
     <div class="post" id="current-post"></div>
+<a href="https://www.instagram.com/kiepersol_krs/" target="_blank">
+        <img src="instagram.png" alt="Instagram" class="instagram-icon">
+    </a>
   </div>
 
   <script>
