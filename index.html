@@ -23,16 +23,16 @@
     .post {
       background-color: transparent;
       border-radius: 22px;
-      width: 90%;
-      height: 90%;
-      max-width: 50vh;
+      width: 90dvw;
+      height: auto;
+      max-width: 50dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       position: relative;
       margin: auto;
-      margin-top: 5vh;
+      margin-bottom: 5vh;
     }
 
     .post img {
@@ -50,11 +50,12 @@
       color: white;
       cursor: pointer;
       z-index: 10;
+      opacity: 0.5;
     }
 
 .caption {
   position: fixed;
-  bottom: 18%;
+  bottom: 18dvh;
   left: 50%;
   transform: translate(-50%, 50%);
 background-color: rgba(255, 255, 255, 0.0);
@@ -64,7 +65,7 @@ background-color: rgba(255, 255, 255, 0.0);
   display: none;
   z-index: 10;
   width: 70%;
-      max-width: 50vh;
+      max-width: 50dvw;
   text-align: center;
   font-size: 14px;
   line-height: 1.5;
